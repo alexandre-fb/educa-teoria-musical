@@ -1,19 +1,61 @@
-# Cursor Rules — Projeto Web Interativo (Vue + Tailwind)
+# Cursor Rules — Projeto Web Interativo de Teoria Musical
+(Vue 3 + Tailwind + Supabase)
 
 ## Objetivo do projeto
-Este é um projeto web interativo focado no estudo e prática de teoria musical.
+Projeto web interativo focado no estudo e prática de teoria musical,
+com forte ênfase em experiência do usuário, clareza visual e reutilização
+de componentes musicais.
 
-O projeto possui dois tipos de usuários:
-- Usuário visitante (gratuito):
+O produto é pensado como um app educacional gratuito,
+com monetização progressiva baseada em valor percebido.
+
+---
+
+## Estratégia de lançamento (produto por fases)
+
+### Fase 1 — Conteúdo e audiência
+- Todo o conteúdo educacional é gratuito
+- Usuário visitante:
   - não faz login
   - não possui persistência de dados
-  - vê anúncios
-- Usuário premium (pago):
-  - faz login
-  - não vê anúncios
-  - tem progresso, preferências e histórico persistidos no backend
+  - visualiza anúncios
+- Login pode existir, mas não há cobrança ativa
+- Foco em:
+  - qualidade do conteúdo
+  - experiência de estudo
+  - SEO e aquisição orgânica
 
-A persistência de dados é um benefício exclusivo do usuário premium
+### Fase 2 — Monetização (futuro)
+- Ativação de assinatura premium
+- Trilhas de estudo estruturadas
+- Persistência de progresso, preferências e histórico como benefício pago
+- Remoção de anúncios para usuários premium
+
+A arquitetura deve estar preparada para assinatura,
+mas nenhuma lógica de cobrança deve ser implementada
+sem solicitação explícita.
+
+---
+
+## Tipos de usuários
+
+### Usuário visitante (gratuito)
+- Não faz login
+- Não salva progresso
+- Vê anúncios
+- Acessa todo o conteúdo educacional
+
+### Usuário autenticado (sem assinatura, fase inicial)
+- Pode fazer login
+- Ainda não possui benefícios premium
+- Serve para futuras transições de produto
+
+### Usuário premium (pago – futuro)
+- Faz login
+- Não vê anúncios
+- Possui progresso, preferências e histórico persistidos no backend
+
+Persistência de dados é um benefício premium
 e faz parte da proposta de valor do produto.
 
 ---
@@ -25,7 +67,7 @@ e faz parte da proposta de valor do produto.
 - Pinia (estado global)
 - Shadcn-vue (quando fizer sentido)
 - Supabase (autenticação + banco de dados)
-- Backend usado somente para usuários logados
+- Backend usado apenas para usuários autenticados
 
 ---
 
@@ -41,10 +83,10 @@ e faz parte da proposta de valor do produto.
 
 ## Vue
 - Usar Composition API (`script setup`)
-- Componentes pequenos e com responsabilidade única
+- Componentes pequenos, previsíveis e com responsabilidade única
 - Evitar lógica complexa dentro do template
-- Extrair lógica reutilizável para composables (`useAuth`, `useProgress`, etc)
-- Componentes devem ser previsíveis e fáceis de testar
+- Extrair lógica reutilizável para composables (`useAuth`, `useProgress`, etc.)
+- Componentes devem ser fáceis de reutilizar e testar
 
 ---
 
@@ -57,21 +99,25 @@ e faz parte da proposta de valor do produto.
 - Stores devem:
   - centralizar a lógica de negócio
   - ser a única fonte de verdade
-  - lidar com carregamento, erro e sucesso
+  - lidar com loading, erro e sucesso
 - Evitar duplicação de estado entre componentes
 
 ---
 
 ## Autenticação e acesso
 - Login não é obrigatório para usar o app
-- Visitantes podem acessar todo o conteúdo educacional
+- Visitantes acessam todo o conteúdo educacional
 - Visitantes não salvam progresso nem preferências
+- Usuários autenticados:
+  - podem existir antes da monetização
+  - não são automaticamente premium
 - Usuários premium:
   - precisam estar autenticados
-  - têm dados sincronizados com o backend
-- O código deve sempre verificar:
-  - se o usuário está autenticado
-  - se possui plano premium
+  - possuem dados sincronizados com o backend
+
+O código deve sempre verificar:
+- se o usuário está autenticado
+- se possui plano premium (quando existir)
 
 ---
 
@@ -79,10 +125,11 @@ e faz parte da proposta de valor do produto.
 - Nenhum dado deve ser salvo no localStorage
 - Persistência acontece apenas via backend
 - Visitantes sempre iniciam em estado neutro
-- A aplicação deve lidar bem com:
+- A aplicação deve lidar corretamente com:
   - usuário não logado
   - usuário logado
   - perda de sessão
+  - estados vazios
 
 ---
 
@@ -92,6 +139,33 @@ e faz parte da proposta de valor do produto.
 - Nunca usar intersticiais ou timers obrigatórios
 - Preferir banners discretos e previsíveis no layout
 - UX sempre tem prioridade sobre monetização
+
+---
+
+## Componentes musicais (core do produto)
+- Componentes como Piano são centrais ao projeto
+- Devem ser:
+  - altamente reutilizáveis
+  - desacoplados da lógica dos exercícios
+  - desacoplados do motor de som
+- UI e som devem se comunicar apenas via eventos:
+  - `noteOn`
+  - `noteOff`
+- O motor de som:
+  - não deve depender de Vue
+  - não deve conhecer componentes
+  - deve ser tratado como um serviço isolado
+
+---
+
+## Conteúdo educacional (blog, artigos, trilhas)
+- O projeto pode incluir páginas de conteúdo textual
+- O conteúdo pode vir de:
+  - arquivos locais (markdown, JSON)
+  - CMS headless (futuro)
+- O código deve evitar acoplamento forte
+  a qualquer CMS específico
+- SEO é prioridade
 
 ---
 
@@ -108,12 +182,13 @@ e faz parte da proposta de valor do produto.
 ## IA no desenvolvimento
 - A IA deve ajudar com:
   - estrutura inicial do projeto
+  - criação de componentes
   - refactors pontuais
   - melhorias incrementais
 - A IA não deve:
   - reestruturar a arquitetura sem solicitação explícita
   - reescrever grandes partes do projeto automaticamente
-  - adicionar bibliotecas sem justificar
+  - adicionar bibliotecas sem justificativa clara
 
 Sempre explicar:
 - o que está sendo feito
@@ -133,11 +208,11 @@ Sempre explicar:
 ## Filosofia do projeto
 O valor do produto está na continuidade.
 Persistência de dados é um benefício premium.
-O app deve funcionar bem sem login,
-mas ficar claramente melhor com login.
+
+O app deve funcionar perfeitamente sem login,
+mas ficar claramente melhor com login
+e ainda melhor com assinatura.
 
 Primeiro funcional.
 Depois escalável.
 Sempre simples.
-
-
