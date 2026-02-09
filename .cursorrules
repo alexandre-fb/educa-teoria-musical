@@ -68,6 +68,7 @@ e faz parte da proposta de valor do produto.
 - Shadcn-vue (quando fizer sentido)
 - Supabase (autenticação + banco de dados)
 - Backend usado apenas para usuários autenticados
+- TypeScript (obrigatório)
 
 ---
 
@@ -87,6 +88,16 @@ e faz parte da proposta de valor do produto.
 - Evitar lógica complexa dentro do template
 - Extrair lógica reutilizável para composables (`useAuth`, `useProgress`, etc.)
 - Componentes devem ser fáceis de reutilizar e testar
+- Usar Composition API (`script setup`)
+- Usar TypeScript em todos os componentes (`lang="ts"`)
+
+---
+
+## TypeScript
+- Evitar `any`
+- Preferir tipos explícitos para eventos e props
+- Criar tipos musicais reutilizáveis (`Note`, `Octave`, etc.)
+- Arquivos de domínio ficam em `src/music`
 
 ---
 
