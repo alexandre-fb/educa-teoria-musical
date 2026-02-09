@@ -10,9 +10,9 @@ import GuitarWithSound from '@/components/GuitarWithSound.vue'
       <NoteIdentifyExercise from="C3" to="C5" />
     </section>
 
-    <section class="flex flex-col items-center gap-4">
-      <h2 class="text-xl font-semibold text-gray-800">Violão</h2>
-      <GuitarWithSound />
+    <section class="flex flex-col items-center gap-6">
+      <h1 class="text-2xl font-semibold text-gray-800">Identificar nota</h1>
+      <NoteIdentifyExercise from="C3" to="C5" instrument="guitar" />
     </section>
   </div>
 </template>

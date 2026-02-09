@@ -1,14 +1,20 @@
 <script setup lang="ts">
 import { ref, computed, watchEffect } from 'vue'
 import PianoWithSound from '@/components/PianoWithSound.vue'
+import GuitarWithSound from '@/components/GuitarWithSound.vue'
 import type { Note } from '@/music/notes'
 import { generateNotes } from '@/music/notes'
 
-const props = defineProps<{
-  notes?: Note[]
-  from?: Note
-  to?: Note
-}>()
+const props = withDefaults(
+  defineProps<{
+    notes?: Note[]
+    from?: Note
+    to?: Note
+    instrument?: 'piano' | 'guitar'
+    fretCount?: number
+  }>(),
+  { instrument: 'piano' }
+)
 
 // Fonte das notas: prioriza array explícito, depois intervalo, senão vazio
 const availableNotes = computed(() => {
@@ -90,9 +96,14 @@ const pianoTo = computed(() => {
       </div>
       
       <PianoWithSound
-        v-if="pianoFrom && pianoTo"
+        v-if="instrument === 'piano' && pianoFrom && pianoTo"
         :from="pianoFrom"
         :to="pianoTo"
+        @noteSelected="onNoteSelected"
+      />
+      <GuitarWithSound
+        v-else-if="instrument === 'guitar'"
+        :fretCount="fretCount"
         @noteSelected="onNoteSelected"
       />
     </template>
