@@ -65,7 +65,7 @@ function selectNote(note: Note) {
           v-for="(note, fretIndex) in notes.slice(0, fretCount + 1)"
           :key="fretIndex"
           type="button"
-          class="relative flex-1 min-w-0 h-10 border-r-2 border-neutral-700 flex items-center justify-center transition-all duration-[180ms] cursor-pointer group z-20"
+          class="relative flex-1 min-w-0 h-10 border-r-2 border-neutral-700 flex items-center justify-center transition-all duration-[120ms] ease cursor-pointer group z-20 hover:bg-primary-soft/20 hover:border-primary"
           :aria-label="`Corda ${STRINGS[stringIndex]}, traste ${fretIndex}, nota ${note}`"
           @click="selectNote(note)"
         >
