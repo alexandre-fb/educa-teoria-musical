@@ -1,19 +1,5 @@
 import type { Note } from './notes'
-
-/** A4 = 69 em MIDI. Índice da nota na oitava (C=0, D=2, ..., B=11). */
-const SEMITONES: Record<string, number> = {
-  C: 0, D: 2, E: 4, F: 5, G: 7, A: 9, B: 11,
-}
-
-/**
- * Converte nota (ex: C4, A3) em número MIDI.
- * A4 = 69; usamos isso para calcular frequência depois.
- */
-export function noteToMidi(note: Note): number {
-  const letter = note[0]
-  const octave = parseInt(note[1], 10)
-  return (octave + 1) * 12 + SEMITONES[letter]
-}
+import { noteToMidi } from './notes'
 
 /** Frequência em Hz a partir do número MIDI. A4 = 440 Hz. */
 function midiToFrequency(midi: number): number {
@@ -63,7 +49,8 @@ export function useSimpleSoundEngine() {
     const oscillator = context.createOscillator()
     const gainNode = context.createGain()
 
-    const frequency = midiToFrequency(noteToMidi(note))
+    const midi = noteToMidi(note)
+    const frequency = midiToFrequency(midi)
     oscillator.type = 'sine'
     oscillator.frequency.value = frequency
     gainNode.gain.value = 0.2
