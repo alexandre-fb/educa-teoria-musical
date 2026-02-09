@@ -79,18 +79,18 @@ const pianoTo = computed(() => {
 <template>
   <div class="flex flex-col items-center justify-center gap-6 p-6 w-full">
     <template v-if="availableNotes.length === 0">
-      <p class="text-lg text-gray-600">Nenhuma nota configurada</p>
+      <p class="text-lg text-neutral-300">Nenhuma nota configurada</p>
     </template>
     
     <template v-else>
       <div class="text-center">
-        <p class="text-xl text-gray-700 mb-2">
-          Clique na nota: <span class="text-3xl font-bold text-blue-600">{{ targetNote }}</span>
+        <p class="text-xl text-neutral-300 mb-2">
+          Clique na nota: <span class="text-3xl font-bold text-secondary ring-2 ring-primary-soft rounded px-2 shadow-[0_0_12px_rgba(112,185,102,0.4)]">{{ targetNote }}</span>
         </p>
-        <p v-if="showCorrectFeedback" class="text-lg text-green-600 animate-pulse">
+        <p v-if="showCorrectFeedback" class="text-lg text-primary animate-pulse">
           ✓ Correto!
         </p>
-        <p v-else-if="selectedNote && !showCorrectFeedback" class="text-lg text-red-600">
+        <p v-else-if="selectedNote && !showCorrectFeedback" class="text-lg text-accent">
           ✗ Errado. Você clicou em {{ selectedNote }}
         </p>
       </div>

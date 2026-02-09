@@ -34,13 +34,13 @@ function onNoteSelected(note: Note) {
     <div class="flex items-center gap-2">
       <button
         type="button"
-        class="p-2 rounded border border-gray-300 bg-white hover:bg-gray-50 text-lg"
+        class="p-2 rounded border border-neutral-700 bg-background-surface text-neutral-100 hover:bg-background-elevated text-lg"
         :aria-label="muted ? 'Ativar som' : 'Desligar som'"
         @click="muted = !muted"
       >
         {{ muted ? '🔇' : '🔊' }}
       </button>
-      <span class="text-sm text-gray-600">
+      <span class="text-sm text-neutral-300">
         {{ muted ? 'Som desligado' : 'Som ligado' }}
       </span>
     </div>

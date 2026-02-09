@@ -40,10 +40,9 @@ function selectNote(note: Note) {
 </script>
 
 <template>
-  <!-- Braço do violão: madeira, cordas horizontais, trastes verticais, casas circulares -->
+  <!-- Braço do violão: base elevated, cordas, trastes, casas com tokens -->
   <div
-    class="w-full rounded-xl shadow-md overflow-hidden border border-amber-900/80"
-    style="background: linear-gradient(180deg, #78350f 0%, #92400e 50%, #78350f 100%)"
+    class="w-full rounded-xl overflow-hidden border border-background-elevated bg-background-elevated"
     role="group"
     aria-label="Violão"
   >
@@ -52,21 +51,21 @@ function selectNote(note: Note) {
       <div
         v-for="(notes, stringIndex) in stringNotes"
         :key="stringIndex"
-        class="relative flex border-b border-gray-500/50 last:border-b-0"
+        class="relative flex border-b-2 border-neutral-700 last:border-b-0"
       >
-        <!-- Corda: linha horizontal fina cinza, atravessa todo o braço -->
+        <!-- Corda: linha horizontal fina -->
         <div
-          class="absolute inset-x-0 top-1/2 h-px -translate-y-px bg-gray-400/70 pointer-events-none z-0"
+          class="absolute inset-x-0 top-1/2 h-px -translate-y-px bg-neutral-700 pointer-events-none z-0"
           aria-hidden="true"
         />
         <!-- Nut: primeira coluna mais grossa -->
-        <div class="w-4 flex-shrink-0 border-r-4 border-amber-950 bg-amber-950/70 z-10" />
-        <!-- Casas (trastes): divisão vertical, círculo central clicável -->
+        <div class="w-4 flex-shrink-0 border-r-4 border-neutral-700 bg-background-surface z-10" />
+        <!-- Casas (trastes): divisão vertical bem visível, círculo central clicável -->
         <button
           v-for="(note, fretIndex) in notes.slice(0, fretCount + 1)"
           :key="fretIndex"
           type="button"
-          class="relative flex-1 min-w-0 h-10 border-r border-l border-amber-900/90 flex items-center justify-center transition-all duration-[180ms] cursor-pointer group z-20"
+          class="relative flex-1 min-w-0 h-10 border-r-2 border-neutral-700 flex items-center justify-center transition-all duration-[180ms] cursor-pointer group z-20"
           :aria-label="`Corda ${STRINGS[stringIndex]}, traste ${fretIndex}, nota ${note}`"
           @click="selectNote(note)"
         >
@@ -74,8 +73,8 @@ function selectNote(note: Note) {
             :class="[
               'inline-flex items-center justify-center min-w-[1.25rem] min-h-[1.25rem] px-1 rounded-full text-[10px] font-medium transition-all duration-[180ms] pointer-events-none',
               note === activeNote
-                ? 'scale-110 bg-blue-500 text-white ring-2 ring-blue-300'
-                : 'bg-amber-800/50 text-amber-100/80 group-hover:bg-amber-700/70 group-hover:scale-105'
+                ? 'scale-110 bg-primary text-background ring-2 ring-primary-soft'
+                : 'bg-background text-neutral-100 group-hover:bg-background-elevated group-hover:scale-105'
             ]"
           >
             {{ note }}

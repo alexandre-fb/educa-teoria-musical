@@ -75,7 +75,7 @@ function handleNoteClick(note: Note) {
 </script>
 
 <template>
-  <div class="flex w-full justify-center" role="group" aria-label="Piano">
+  <div class="flex w-full justify-center rounded-xl border border-background-elevated bg-background-elevated p-2" role="group" aria-label="Piano">
     <!-- Teclas brancas são a base visual -->
     <div
       v-for="whiteNote in whiteNotes"
@@ -87,10 +87,10 @@ function handleNoteClick(note: Note) {
         type="button"
         tabindex="0"
         :class="[
-          'w-12 h-40 border border-gray-300 rounded-b transition-colors text-xs font-medium',
+          'w-12 h-40 border rounded-b transition-colors text-xs font-medium',
           currentNote === whiteNote
-            ? 'bg-blue-200 border-blue-400'
-            : 'bg-white hover:bg-gray-100 text-gray-800'
+            ? 'bg-primary text-background border-background-elevated'
+            : 'bg-white border border-neutral-300 text-neutral-700 hover:bg-neutral-100'
         ]"
         :aria-label="`Nota ${whiteNote}`"
         @click="handleNoteClick(whiteNote)"
@@ -104,10 +104,10 @@ function handleNoteClick(note: Note) {
         type="button"
         tabindex="0"
         :class="[
-          'absolute top-0 w-6 h-24 rounded-b transition-colors text-xs z-10',
+          'absolute top-0 w-6 h-24 rounded-b border border-background-elevated transition-colors text-xs z-10',
           currentNote === blackKeyForWhite(whiteNote)
-            ? 'bg-blue-600 border-blue-400'
-            : 'bg-gray-900 hover:bg-gray-800 text-white'
+            ? 'bg-primary text-background'
+            : 'bg-background text-neutral-100 hover:bg-background-elevated'
         ]"
         style="right: -0.75rem"
         :aria-label="`Nota ${blackKeyForWhite(whiteNote)}`"
