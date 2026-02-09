@@ -30,7 +30,7 @@ function onNoteSelected(note: Note) {
 </script>
 
 <template>
-  <div class="flex flex-col gap-3">
+  <div class="flex flex-col gap-3 w-full">
     <div class="flex items-center gap-2">
       <button
         type="button"

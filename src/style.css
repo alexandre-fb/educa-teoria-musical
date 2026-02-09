@@ -5,6 +5,6 @@
 /* Base: reset e tipografia mínima para foco no estudo (regra UI/UX) */
 @layer base {
   body {
-    @apply antialiased text-gray-900 bg-gray-50;
+    @apply antialiased bg-background text-neutral-100;
   }
 }

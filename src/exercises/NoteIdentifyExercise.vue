@@ -77,7 +77,7 @@ const pianoTo = computed(() => {
 </script>
 
 <template>
-  <div class="flex flex-col items-center gap-6 p-6">
+  <div class="flex flex-col items-center justify-center gap-6 p-6 w-full">
     <template v-if="availableNotes.length === 0">
       <p class="text-lg text-gray-600">Nenhuma nota configurada</p>
     </template>

@@ -75,7 +75,7 @@ function handleNoteClick(note: Note) {
 </script>
 
 <template>
-  <div class="flex" role="group" aria-label="Piano">
+  <div class="flex w-full justify-center" role="group" aria-label="Piano">
     <!-- Teclas brancas são a base visual -->
     <div
       v-for="whiteNote in whiteNotes"
